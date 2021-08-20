@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import MenuListItem from "../menu-list-item";
 import { connect } from "react-redux";
 import WithGurmanService from "../hoc/with-gurman-service";
-import { menuLoaded, menuRequested, addedToCart } from "../../actions";
+import { menuSearched, menuRequested, addedToCart } from "../../actions";
 import Spinner from "../spinner";
+import SearchPanel from "../search-panel";
 
 import "./menu-list.scss";
 
 class MenuList extends Component {
   componentDidMount() {
-    const { menuRequested, GurmanService, menuLoaded } = this.props;
+    const { menuRequested, GurmanService, menuSearched } = this.props;
     menuRequested();
-    GurmanService.getMenuItems().then((res) => menuLoaded(res));
+    GurmanService.getMenuItems().then((res) => menuSearched(res));
   }
   render() {
     const { menuItems, loading, addedToCart } = this.props;
@@ -19,17 +20,22 @@ class MenuList extends Component {
       return <Spinner />;
     }
     return (
-      <ul className="menu__list">
-        {menuItems.map((menuItem) => {
-          return (
-            <MenuListItem
-              key={menuItem.id}
-              menuItem={menuItem}
-              addToCartHandler={() => addedToCart(menuItem.id)}
-            />
-          );
-        })}
-      </ul>
+      <>
+        <h1 className="menu__big-title">The Gurman</h1>
+        <SearchPanel className="menu__search" />
+        <h4 className="menu__premenu"> Our menu:</h4>
+        <ul className="menu__list">
+          {menuItems.map((menuItem) => {
+            return (
+              <MenuListItem
+                key={menuItem.id}
+                menuItem={menuItem}
+                addToCartHandler={() => addedToCart(menuItem.id)}
+              />
+            );
+          })}
+        </ul>
+      </>
     );
   }
 }
@@ -41,7 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  menuLoaded,
+  menuSearched,
   menuRequested,
   addedToCart,
 };

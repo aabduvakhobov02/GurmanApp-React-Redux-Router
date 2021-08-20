@@ -4,9 +4,20 @@ const menuLoaded = (newMenu) => {
     payload: newMenu,
   };
 };
+const menuSearched = (newMenu) => {
+  return {
+    type: "MENU_SEARCHED",
+    payload: newMenu,
+  };
+};
 const menuRequested = () => {
   return {
     type: "MENU_REQUESTED",
+  };
+};
+const menuError = () => {
+  return {
+    type: "MENU_ERROR",
   };
 };
 const addedToCart = (id) => {
@@ -23,4 +34,11 @@ const deleteFromCart = (id) => {
   };
 };
 
-export { menuLoaded, menuRequested, addedToCart, deleteFromCart };
+export {
+  menuLoaded,
+  menuRequested,
+  menuSearched,
+  addedToCart,
+  deleteFromCart,
+  menuError,
+};
