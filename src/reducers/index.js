@@ -22,7 +22,9 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        menu: menuList.filter((item) => item.title.toLowerCase().indexOf(value) > -1),
+        menu: menuList.filter(
+          (item) => item.title.toLowerCase().indexOf(value) > -1
+        ),
         loading: false,
         error: false,
       };
@@ -89,7 +91,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         searchValue: action.payload,
-      }
+      };
     default:
       return state;
   }
