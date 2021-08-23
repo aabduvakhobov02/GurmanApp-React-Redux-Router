@@ -4,12 +4,6 @@ const menuLoaded = (newMenu) => {
     payload: newMenu,
   };
 };
-const menuSearched = (newMenu) => {
-  return {
-    type: "MENU_SEARCHED",
-    payload: newMenu,
-  };
-};
 const menuRequested = () => {
   return {
     type: "MENU_REQUESTED",
@@ -18,6 +12,12 @@ const menuRequested = () => {
 const menuError = () => {
   return {
     type: "MENU_ERROR",
+  };
+};
+const valueChanged = (value) => {
+  return {
+    type: "VALUE_CHANGED",
+    payload: value,
   };
 };
 const addedToCart = (id) => {
@@ -37,8 +37,8 @@ const deleteFromCart = (id) => {
 export {
   menuLoaded,
   menuRequested,
-  menuSearched,
   addedToCart,
   deleteFromCart,
   menuError,
+  valueChanged,
 };

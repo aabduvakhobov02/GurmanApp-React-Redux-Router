@@ -10,14 +10,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "MENU_LOADED":
-      return {
-        ...state,
-        menu: action.payload,
-        loading: false,
-        error: false,
-      };
-    case "MENU_SEARCHED":
-      let value = state.searchValue;
+      const value = state.searchValue;
+      const menuList = action.payload;
       if (value.length === 0) {
         return {
           ...state,
@@ -28,7 +22,7 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        items: [state.menu.filter((item) => item.title.indexOf(value) > -1)],
+        menu: menuList.filter((item) => item.title.toLowerCase().indexOf(value) > -1),
         loading: false,
         error: false,
       };
@@ -91,7 +85,11 @@ const reducer = (state = initialState, action) => {
         ],
         total: (sumx -= itemRemoved.price * itemRemoved.quantity),
       };
-
+    case "VALUE_CHANGED":
+      return {
+        ...state,
+        searchValue: action.payload,
+      }
     default:
       return state;
   }
