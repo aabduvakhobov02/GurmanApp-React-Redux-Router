@@ -1,5 +1,5 @@
 export default class GurmanService {
-  _apiBase = "http://localhost:3000";
+  _apiBase = "https://gurman-app-default-rtdb.asia-southeast1.firebasedatabase.app";
 
   async getResource(url) {
     const response = await fetch(`${this._apiBase}${url}`);
@@ -12,17 +12,16 @@ export default class GurmanService {
   }
 
   async getMenuItems() {
-    return await this.getResource("/menu/");
+    return await this.getResource("/menu.json");
   }
 
   async getItem(id) {
-    const res = await this.getResource("/menu/");
+    const res = await this.getResource("/menu.json");
     console.log(res);
     const item = res.find((el) => {
       console.log(`el.id: ${el.id}, id: ${id}`);
       return el.id === +id;
     });
-    console.log(item);
     return item;
   }
 
@@ -32,7 +31,7 @@ export default class GurmanService {
       id: number,
       order: order,
     };
-    const response = await fetch(`${this._apiBase}/orders`, {
+    const response = await fetch(`${this._apiBase}/orders.json`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -45,9 +44,8 @@ export default class GurmanService {
   }
 
   async getOrderNumber() {
-    const res = await this.getResource("/orders/");
-    const orderNumber = res.length + 1;
+    const res = await this.getResource("/orders.json");
 
-    return orderNumber;
+    return res;
   }
 }

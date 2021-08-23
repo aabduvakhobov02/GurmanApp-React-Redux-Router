@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MenuListItem from "../menu-list-item";
 import { connect } from "react-redux";
 import WithGurmanService from "../hoc/with-gurman-service";
-import { menuSearched, menuRequested, addedToCart } from "../../actions";
+import { menuLoaded, menuRequested, addedToCart } from "../../actions";
 import Spinner from "../spinner";
 import SearchPanel from "../search-panel";
 
@@ -10,9 +10,9 @@ import "./menu-list.scss";
 
 class MenuList extends Component {
   componentDidMount() {
-    const { menuRequested, GurmanService, menuSearched } = this.props;
+    const { menuRequested, GurmanService, menuLoaded } = this.props;
     menuRequested();
-    GurmanService.getMenuItems().then((res) => menuSearched(res));
+    GurmanService.getMenuItems().then((res) => menuLoaded(res));
   }
   render() {
     const { menuItems, loading, addedToCart } = this.props;
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  menuSearched,
+  menuLoaded,
   menuRequested,
   addedToCart,
 };

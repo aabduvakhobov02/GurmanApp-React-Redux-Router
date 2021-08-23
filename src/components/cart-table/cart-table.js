@@ -29,7 +29,7 @@ const CartTable = ({ items, deleteFromCart, GurmanService }) => {
         })}
       </div>
       <button
-        className="menu__btn order_btn"
+        className="order__btn"
         onClick={() => GurmanService.setOrder(generateOrder(items))}
       >
         Order
