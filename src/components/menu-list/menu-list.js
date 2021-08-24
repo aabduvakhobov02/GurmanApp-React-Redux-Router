@@ -19,9 +19,11 @@ class MenuList extends Component {
     menuRequested();
     GurmanService.getMenuItems().then((res) => menuLoaded(res));
   }
-  componentDidUpdate() {
-    const { GurmanService, menuLoaded } = this.props;
-    GurmanService.getMenuItems().then((res) => menuLoaded(res));
+  componentDidUpdate(prevProps) {
+    const { GurmanService, menuLoaded, searchValue } = this.props;
+    if (prevProps.searchValue !== searchValue) {
+      GurmanService.getMenuItems().then((res) => menuLoaded(res));
+    }
   }
   render() {
     const { menuItems, loading, addedToCart, valueChanged } = this.props;
@@ -59,6 +61,7 @@ const mapStateToProps = (state) => {
   return {
     menuItems: state.menu,
     loading: state.loading,
+    searchValue: state.searchValue,
   };
 };
 
