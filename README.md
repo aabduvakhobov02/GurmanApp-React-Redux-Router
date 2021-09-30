@@ -1,8 +1,6 @@
 ## The link of the hosted project:
 
-`https://gurman-app.web.app/`
-
-
+https://gurman-app.web.app/
 
 # Getting Started with Create React App
 
